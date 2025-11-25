@@ -1,0 +1,24 @@
+# Java / Spring Boot
+target/
+*.log
+
+# STS files
+.springBeans
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+
+# IntelliJ
+.idea/
+*.iml
+
+# Node / React
+node_modules/
+dist/
+build/
+
+# OS files
+.DS_Store
+Thumbs.db
