@@ -36,8 +36,12 @@ public class VendorListing {
     private String description;          // description
 
     @Column(nullable = false, precision = 11, scale = 2)
-    private BigDecimal price;     // package prices
-
+    private BigDecimal price;   
+    
+    // package prices
+    @Column(length = 500, nullable = true)
+    private String photourl;
+    
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime createdAt;

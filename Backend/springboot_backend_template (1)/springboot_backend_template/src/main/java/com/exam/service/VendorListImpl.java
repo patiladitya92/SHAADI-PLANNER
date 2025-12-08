@@ -18,8 +18,8 @@ public class VendorListImpl implements VendorList{
 	private final VendorListRepo vendorListRepo;
 	
 	@Override
-	public List<VendorListDto> getVendorList(String name, long catid) {
-		return null;
+	public List<VendorListDto> getVendorList(String location, long catid) {
+		return vendorListRepo.getVendorList(location, catid);
 	}
 
 }
