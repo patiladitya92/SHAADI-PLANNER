@@ -16,10 +16,11 @@ import lombok.AllArgsConstructor;
 public class VendorListImpl implements VendorList{
 
 	private final VendorListRepo vendorListRepo;
-	
-	@Override
-	public List<VendorListDto> getVendorList(String name, long catid) {
-		return null;
-	}
 
+	@Override
+	public List<VendorListDto> getVendorList(String city, long catid) {
+		List<VendorListDto> list = vendorListRepo.getVendorList(city, catid);
+		return list;
+	}
+	
 }
