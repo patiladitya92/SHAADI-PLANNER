@@ -1,146 +1,57 @@
-INSERT INTO service_cat (id, name, createdAt, updatedAt, deleted) VALUES
-  (1, 'HALL',        NOW(), NOW(), 0),
-  (2, 'CATERER',     NOW(), NOW(), 0),
-  (3, 'DJ',          NOW(), NOW(), 0),
-  (4, 'DECORATION',  NOW(), NOW(), 0),
-  (5, 'MAKEUP',      NOW(), NOW(), 0),
-  (6, 'PHOTOGRAPHY', NOW(), NOW(), 0);
+INSERT INTO service_cat (id, created_at, deleted, name, updated_at) VALUES
+(1, '2025-11-30 18:53:57', 0x00, 'DJ', '2025-11-30 18:53:57'),
+(2, '2025-12-10 23:13:44', 0x00, 'CATERER', '2025-12-10 23:13:44'),
+(3, '2025-12-10 23:13:44', 0x00, 'LAWN', '2025-12-10 23:13:44'),
+(4, '2025-12-10 23:13:44', 0x00, 'DECORATION', '2025-12-10 23:13:44'),
+(5, '2025-12-10 23:13:44', 0x00, 'MAKEUP', '2025-12-10 23:13:44'),
+(6, '2025-12-10 23:13:44', 0x00, 'PHOTOGRAPHY', '2025-12-10 23:13:44'),
+(7, '2025-12-10 23:13:44', 0x00, 'HALL', '2025-12-10 23:13:44');
+
 =====================================================================================================================================
-INSERT INTO users
-(id, name, email, password, phone, role, resetToken, resetTokenExpiry,
- createdAt, updatedAt, deleted)
-VALUES
-  (1, 'Admin User',       'admin@example.com',   'pass', '9000000001', 'ROLE_ADMIN',    NULL, NULL, NOW(), NOW(), 0),
-  (2, 'Customer One',     'cust1@example.com',   'pass', '9000000002', 'ROLE_CUSTOMER', NULL, NULL, NOW(), NOW(), 0),
-  (3, 'Customer Two',     'cust2@example.com',   'pass', '9000000003', 'ROLE_CUSTOMER', NULL, NULL, NOW(), NOW(), 0),
-  (4, 'Vendor Hall Pune', 'vendor1@hall.com',    'pass', '9000000004', 'ROLE_VENDOR',   NULL, NULL, NOW(), NOW(), 0),
-  (5, 'Vendor Food Pune', 'vendor2@food.com',    'pass', '9000000005', 'ROLE_VENDOR',   NULL, NULL, NOW(), NOW(), 0),
-  (6, 'Vendor DJ Mumbai', 'vendor3@dj.com',      'pass', '9000000006', 'ROLE_VENDOR',   NULL, NULL, NOW(), NOW(), 0),
-  (7, 'Vendor Decor Mum', 'vendor4@decor.com',   'pass', '9000000007', 'ROLE_VENDOR',   NULL, NULL, NOW(), NOW(), 0),
-  (8, 'Vendor Photo Del', 'vendor5@photo.com',   'pass', '9000000008', 'ROLE_VENDOR',   NULL, NULL, NOW(), NOW(), 0);
+INSERT INTO users (id, created_at, deleted, email, name, password, phone, reset_token, reset_token_expiry, role, updated_at) VALUES
+(1, '2025-11-30 18:03:50', 0x00, 'amit@mail.com', 'Amit', '$2a$10$hP7YA5wAJpmAn7E1fF9DhegYi.bQdeYMV1Er7zJExlLxGrnvRWRTm', '9000000001', NULL, NULL, 'ROLE_CUSTOMER', '2025-11-30 18:03:50'),
+(2, '2025-11-30 18:53:49', 0x00, 'dj@mail.com', 'DJ Owner', '$2a$10$hP7YA5wAJpmAn7E1fF9DhegYi.bQdeYMV1Er7zJExlLxGrnvRWRTm', '9000000002', NULL, NULL, 'ROLE_VENDOR', '2025-11-30 18:53:49'),
+(3, '2025-12-10 23:16:12', 0x00, 'cust2@e', 'Customer Two', 'pass', '9000000003', NULL, NULL, 'ROLE_CUSTOMER', '2025-12-10 23:16:12'),
+(4, '2025-12-10 23:16:12', 0x00, 'vendor1@h', 'Vendor Hall Pune', '$2a$10$hP7YA5wAJpmAn7E1fF9DhegYi.bQdeYMV1Er7zJExlLxGrnvRWRTm', '9000000004', NULL, NULL, 'ROLE_VENDOR', '2025-12-10 23:16:12'),
+(5, '2025-12-10 23:16:12', 0x00, 'vendor2@f', 'Vendor Food Pune', '$2a$10$hP7YA5wAJpmAn7E1fF9DhegYi.bQdeYMV1Er7zJExlLxGrnvRWRTm', '9000000005', NULL, NULL, 'ROLE_VENDOR', '2025-12-10 23:16:12'),
+(6, '2025-12-10 23:16:12', 0x00, 'vendor3@dj', 'Vendor DJ Mumbai', '$2a$10$hP7YA5wAJpmAn7E1fF9DhegYi.bQdeYMV1Er7zJExlLxGrnvRWRTm', '9000000006', NULL, NULL, 'ROLE_VENDOR', '2025-12-10 23:16:12'),
+(7, '2025-12-10 23:16:12', 0x00, 'vendor4@de', 'Vendor Decor Mum', '$2a$10$hP7YA5wAJpmAn7E1fF9DhegYi.bQdeYMV1Er7zJExlLxGrnvRWRTm', '9000000007', NULL, NULL, 'ROLE_VENDOR', '2025-12-10 23:16:12'),
+(8, '2025-12-10 23:16:12', 0x00, 'vendor5@ph', 'Vendor Photo Del', '$2a$10$hP7YA5wAJpmAn7E1fF9DhegYi.bQdeYMV1Er7zJExlLxGrnvRWRTm', '9000000008', NULL, NULL, 'ROLE_VENDOR', '2025-12-10 23:16:12');
 ====================================================================================================================================
-INSERT INTO customers
-(id, user_id, addr, city, state, createdAt, updatedAt, deleted)
-VALUES
-  (1, 2, 'Karve Nagar',     'Pune',   'Maharashtra', NOW(), NOW(), 0),
-  (2, 3, 'Baner Road',      'Pune',   'Maharashtra', NOW(), NOW(), 0);
+INSERT INTO customers (id, addr, city, created_at, deleted, state, updated_at, user_id) VALUES
+(1, 'A1 street', 'Pune', '2025-11-30 18:53:57', 0x00, 'MH', '2025-11-30 18:53:57', 1),
+(2, 'Baner Road', 'Pune', '2025-12-10 23:17:05', 0x00, 'Maharashtra', '2025-12-10 23:17:05', 3);
+
 ======================================================================================
-INSERT INTO vendors
-(id, user_id, cat_id, bizname, addr, city, state, avail, createdAt, updatedAt, deleted)
-VALUES
-  (1, 4, 1, 'Royal Palace Banquet',      'FC Road',        'Pune',   'Maharashtra', 1, NOW(), NOW(), 0),
-  (2, 5, 2, 'Delight Caterers',          'JM Road',        'Pune',   'Maharashtra', 1, NOW(), NOW(), 0),
-  (3, 6, 3, 'Bass Boost DJs',            'Andheri West',   'Mumbai', 'Maharashtra', 1, NOW(), NOW(), 0),
-  (4, 7, 4, 'Elegant Decor Studio',      'Bandra',         'Mumbai', 'Maharashtra', 1, NOW(), NOW(), 0),
-  (5, 8, 6, 'Memories Photography Co.',  'Connaught Place','Delhi',  'Delhi',       1, NOW(), NOW(), 0);
+INSERT INTO vendors (id, addr, avail, bizname, city, created_at, deleted, state, updated_at, cat_id, user_id) VALUES
+(1, 'DJ lane', 0x01, 'Beat DJ', 'Pune', '2025-11-30 18:53:57', 0x00, 'MH', '2025-11-30 18:53:57', 1, 2),
+(2, 'JM Road', 0x01, 'Delight Caterers', 'Pune', '2025-12-10 23:18:04', 0x00, 'Maharashtra', '2025-12-10 23:18:04', 2, 5),
+(3, 'Andheri West', 0x01, 'Bass Boost DJs', 'Mumbai', '2025-12-10 23:18:04', 0x00, 'Maharashtra', '2025-12-10 23:18:04', 3, 6),
+(4, 'Bandra', 0x01, 'Elegant Decor Studio', 'Mumbai', '2025-12-10 23:18:04', 0x00, 'Maharashtra', '2025-12-10 23:18:04', 4, 7),
+(5, 'Connaught Place', 0x01, 'Memories Photography Co.', 'Delhi', '2025-12-10 23:18:04', 0x00, 'Delhi', '2025-12-10 23:18:04', 6, 8);
 ================================================================================================================
-INSERT INTO vendor_list
-(id, vendor_id, title, description, price, photourl,
- createdAt, updatedAt, deleted)
-VALUES
-  -- Hall listings (Pune)
-  (1, 1, 'Royal Grand Hall Basic',
-   'Banquet hall for up to 300 guests, basic decor included.',
-   80000.00,
-   'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600',
-   NOW(), NOW(), 0),
-
-  (2, 1, 'Royal Grand Hall Premium',
-   'Banquet hall for up to 500 guests with premium decor and lights.',
-   150000.00,
-   'https://images.unsplash.com/photo-1529634892667-38f0e5c1a3d1?w=600',
-   NOW(), NOW(), 0),
-
-  -- Caterer listings (Pune)
-  (3, 2, 'Veg Wedding Buffet',
-   'Pure veg buffet, 3 starters, 5 main course dishes, 3 desserts.',
-   700.00,
-   'https://images.unsplash.com/photo-1543353071-873f17a7a088?w=600',
-   NOW(), NOW(), 0),
-
-  (4, 2, 'Premium Multi-cuisine Buffet',
-   'Veg + non-veg, live counters, desserts.',
-   1200.00,
-   'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600',
-   NOW(), NOW(), 0),
-
-  -- DJ listings (Mumbai)
-  (5, 3, 'Sangeet DJ Basic',
-   '4 hours DJ with basic lighting and sound system.',
-   25000.00,
-   'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600',
-   NOW(), NOW(), 0),
-
-  (6, 3, 'Sangeet DJ Premium',
-   '6 hours DJ with advanced lighting, smoke, and sound.',
-   45000.00,
-   'https://images.unsplash.com/photo-1518972559570-7cc1309f3229?w=600',
-   NOW(), NOW(), 0),
-
-  -- Decor listings (Mumbai)
-  (7, 4, 'Stage Decor Gold Theme',
-   'Wedding stage with golden theme, floral backdrop.',
-   60000.00,
-   'https://images.unsplash.com/photo-1519741497674-611481863552?w=600',
-   NOW(), NOW(), 0),
-
-  (8, 4, 'Haldi & Mehendi Decor Combo',
-   'Decor package for Haldi and Mehendi events.',
-   35000.00,
-   'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600',
-   NOW(), NOW(), 0),
-
-  -- Photography listings (Delhi)
-  (9, 5, 'Wedding Day Photography',
-   'Full-day coverage with one candid and one traditional photographer.',
-   90000.00,
-   'https://images.unsplash.com/photo-1519741497674-611481863552?w=600',
-   NOW(), NOW(), 0),
-
-  (10, 5, 'Pre-wedding Shoot',
-   'Outdoor pre-wedding shoot with edited album.',
-   50000.00,
-   'https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=600',
-   NOW(), NOW(), 0),
-
-  -- A couple of listings without images to test placeholder
-  (11, 1, 'Small Family Function Hall',
-   'Hall suitable for small functions up to 150 guests.',
-   40000.00,
-   NULL,
-   NOW(), NOW(), 0),
-
-  (12, 2, 'Budget Veg Buffet',
-   'Simple veg menu for budget weddings.',
-   450.00,
-   NULL,
-   NOW(), NOW(), 0);
+INSERT INTO vendor_list (id, created_at, deleted, description, price, title, updated_at, vendor_id, photo_url, photourl) VALUES
+(1, '2025-11-30 18:54:03', 0x00, 'Small DJ pack', 5000.00, 'Haldi DJ Basic', '2025-11-30 18:54:03', 1, NULL, NULL),
+(2, '2025-12-10 23:19:02', 0x00, 'Banquet hall for up to 500 guests with premium decor and lights.', 150000.00, 'Royal Grand Hall Premium', '2025-12-10 23:19:02', 1, NULL, 'https://images.unsplash.com/photo-1529634892667-38f0e5c1a3d1?w=600'),
+(3, '2025-12-10 23:19:02', 0x00, 'Pure veg buffet, 3 starters, 5 main course dishes, 3 desserts.', 700.00, 'Veg Wedding Buffet', '2025-12-10 23:19:02', 2, NULL, 'https://images.unsplash.com/photo-1543353071-873f17a7a088?w=600'),
+(4, '2025-12-10 23:19:02', 0x00, 'Veg + non-veg, live counters, desserts.', 1200.00, 'Premium Multi-cuisine Buffet', '2025-12-10 23:19:02', 2, NULL, 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600'),
+(5, '2025-12-10 23:19:02', 0x00, '4 hours DJ with basic lighting and sound system.', 25000.00, 'Sangeet DJ Basic', '2025-12-10 23:19:02', 3, NULL, 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600'),
+(6, '2025-12-10 23:19:02', 0x00, '6 hours DJ with advanced lighting, smoke, and sound.', 45000.00, 'Sangeet DJ Premium', '2025-12-10 23:19:02', 3, NULL, 'https://images.unsplash.com/photo-1518972559570-7cc1309f3229?w=600'),
+(7, '2025-12-10 23:19:02', 0x00, 'Wedding stage with golden theme, floral backdrop.', 60000.00, 'Stage Decor Gold Theme', '2025-12-10 23:19:02', 4, NULL, 'https://images.unsplash.com/photo-1519741497674-611481863552?w=600'),
+(8, '2025-12-10 23:19:02', 0x00, 'Decor package for Haldi and Mehendi events.', 35000.00, 'Haldi & Mehendi Decor Combo', '2025-12-10 23:19:02', 4, NULL, 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600'),
+(9, '2025-12-10 23:19:02', 0x00, 'Full-day coverage with one candid and one traditional photographer.', 90000.00, 'Wedding Day Photography', '2025-12-10 23:19:02', 5, NULL, 'https://images.unsplash.com/photo-1519741497674-611481863552?w=600'),
+(10, '2025-12-10 23:19:02', 0x00, 'Outdoor pre-wedding shoot with edited album.', 50000.00, 'Pre-wedding Shoot', '2025-12-10 23:19:02', 5, NULL, 'https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=600'),
+(11, '2025-12-10 23:19:02', 0x00, 'Hall suitable for small functions up to 150 guests.', 40000.00, 'Small Family Function Hall', '2025-12-10 23:19:02', 1, NULL, NULL),
+(12, '2025-12-10 23:19:02', 0x00, 'Simple veg menu for budget weddings.', 450.00, 'Budget Veg Buffet', '2025-12-10 23:19:02', 2, NULL, NULL);
 
 ==========================================================================================================================================
-INSERT INTO bookings
-(id, cust_id, vendor_id, list_id, eventdate, bookdate,
- status, amt, createdAt, updatedAt, deleted)
-VALUES
-  -- Customer 1, Pune hall, pending
-  (1, 1, 1, 1, '2026-01-20', NOW(), 'PENDING',   80000.00, NOW(), NOW(), 0),
-
-  -- Customer 1, Pune caterer, accepted
-  (2, 1, 2, 3, '2026-01-20', NOW(), 'ACCEPTED',  700.00,   NOW(), NOW(), 0),
-
-  -- Customer 2, DJ Mumbai, paid
-  (3, 2, 3, 5, '2026-02-10', NOW(), 'PAID',      25000.00, NOW(), NOW(), 0),
-
-  -- Customer 2, decor Mumbai, rejected
-  (4, 2, 4, 7, '2026-02-10', NOW(), 'REJECTED',  60000.00, NOW(), NOW(), 0),
-
-  -- Customer 1, photography Delhi, cancelled
-  (5, 1, 5, 9, '2026-03-15', NOW(), 'CANCELLED', 90000.00, NOW(), NOW(), 0);
+INSERT INTO bookings (id, amt, bookdate, created_at, deleted, eventdate, status, updated_at, cust_id, list_id, vendor_id) VALUES
+(1, 5000.00, '2025-11-30 18:54:09', '2025-11-30 18:54:09', 0x00, '2025-12-25', 'PENDING', '2025-11-30 18:54:09', 1, 1, 1),
+(2, 700.00, '2025-12-10 23:19:43', '2025-12-10 23:19:43', 0x00, '2026-01-20', 'ACCEPTED', '2025-12-10 23:19:43', 1, 3, 2),
+(3, 25000.00, '2025-12-10 23:19:43', '2025-12-10 23:19:43', 0x00, '2026-02-10', 'PAID', '2025-12-10 23:19:43', 2, 5, 3),
+(4, 60000.00, '2025-12-10 23:19:43', '2025-12-10 23:19:43', 0x00, '2026-02-10', 'REJECTED', '2025-12-10 23:19:43', 2, 7, 4),
+(5, 90000.00, '2025-12-10 23:19:43', '2025-12-10 23:19:43', 0x00, '2026-03-15', 'CANCELLED', '2025-12-10 23:19:43', 1, 9, 5);
 =================================================================================================================
-INSERT INTO payments
-(id, book_id, amt, status, mode, txnid, paydate,
- createdAt, updatedAt, deleted)
-VALUES
-  (1, 3, 25000.00, 'SUCCESS', 'CARD',
-   'rzp_test_txn_0001',
-   NOW(), NOW(), NOW(), 0);
+INSERT INTO payments (id, amt, created_at, deleted, mode, paydate, status, txnid, updated_at, book_id) VALUES
+(1, 25000.00, '2025-12-10 23:20:04', 0x00, 'CARD', '2025-12-10 23:20:04', 'SUCCESS', 'rzp_test_txn_0001', '2025-12-10 23:20:04', 3);
 

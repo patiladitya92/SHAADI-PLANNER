@@ -32,10 +32,10 @@ public class VendorListImpl implements VendorList{
 	
 
 	@Override
-	public List<VendorListingVendorRes> getListingsByVendorUserId(Long userId) {
-		    return vendorListRepo.findByVendorUserIdAndDeletedFalse(userId);  // or JPQL with join on vendor.user.id
+	public List<VendorListingVendorRes> getListForVendor(Long userId) {
+		    return vendorListRepo.getListForVendor(userId);  // or JPQL with join on vendor.user.id
 	}
-
+//
 
 
 	@Override
@@ -68,7 +68,7 @@ public class VendorListImpl implements VendorList{
 		 listing.setTitle(dto2.getTitle());
 	        listing.setDescription(dto2.getDescription());
 	        listing.setPrice(dto2.getPrice());
-	        listing.setPhotoUrl(dto2.getPhotoUrl());
+	        listing.setPhotourl(dto2.getPhotourl());
 	        
 	        return "updated";
 	        

@@ -16,7 +16,7 @@ public class VendorListingReq {
     private String title;
     private String description;
     private BigDecimal price;
-    private String photoUrl;   // optional, can be null
+    private String photourl;   // optional, can be null
 
      // required so backend knows which category
 }

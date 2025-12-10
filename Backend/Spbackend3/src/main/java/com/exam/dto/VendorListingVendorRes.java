@@ -19,9 +19,7 @@ public class VendorListingVendorRes {
     private String title;
     private String description;
     private BigDecimal price;
-    
-    private Long categoryId;
-
+    private String photourl;
     private Long vendorId;
   
   

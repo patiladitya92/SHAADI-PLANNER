@@ -9,7 +9,7 @@ import com.exam.dto.VendorListingVendorRes;
 public interface VendorList {
 	public List<VendorListDto> getVendorList(String location, Long catid);
 	
-	public List<VendorListingVendorRes> getListingsByVendorUserId(Long userid);
+	public List<VendorListingVendorRes> getListForVendor(Long userid);
 
 	public String createMyListing(Long userId, VendorListingReq dto2);
 

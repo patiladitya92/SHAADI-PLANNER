@@ -23,7 +23,7 @@ import com.exam.service.VendorList;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/vendorlistings")
+@RequestMapping
 @AllArgsConstructor
 public class VendorListingController {
 	
@@ -34,11 +34,13 @@ public class VendorListingController {
 		return ResponseEntity.ok(vendorList.getVendorList(city, catId));
 	}
 	
+	
+	 
 	@GetMapping("/api/vendors/me/listings")
 	@PreAuthorize("hasRole('VENDOR')")
 	public ResponseEntity<?> getMyListings(@AuthenticationPrincipal JwtDTO dto) {
 
-	    return ResponseEntity.ok(vendorList.getListingsByVendorUserId(dto.getUserId()));
+	    return ResponseEntity.ok(vendorList.getListForVendor(dto.getUserId()));
 	}
 	
 	@PostMapping("/api/vendors/me/listings")

@@ -39,7 +39,7 @@ public class VendorListing {
     private BigDecimal price;     // package prices
     
     @Column(length=500, nullable=true)
-    private String photoUrl;
+    private String photourl;
     
     @CreationTimestamp
     @Column(updatable = false)

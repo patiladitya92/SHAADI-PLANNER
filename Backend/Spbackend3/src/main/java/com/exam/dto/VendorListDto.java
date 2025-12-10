@@ -12,6 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class VendorListDto {
-		private Long id;         	private String title;  	private String description;	private BigDecimal price; 	private Long vendorid;	private String vendorname;	private String city;	private String catname;  
+		private Long id;         	private String title;  	private String description;	private BigDecimal price; 	private Long vendorid;	private String vendorname;	private String city;	private String catname; 
+	private String photourl;
 
 }

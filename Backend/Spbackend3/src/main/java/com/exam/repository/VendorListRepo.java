@@ -29,8 +29,23 @@ public interface VendorListRepo extends JpaRepository<VendorListing, Long>{
 	        order by l.price asc
 	        """)
 	    List<VendorListDto> getVendorList(String city, long catid);
+	
+	
+	@Query("""
+		    select new com.exam.dto.VendorListingVendorRes(
+		        l.id,
+		        l.title,
+		        l.description,
+		        l.price,
+		        l.photourl,
+				l.vendor.user.id
+		    )
+		    from VendorListing l
+		    where l.vendor.user.id = ?1
+		      and l.deleted = false
+		""")
+		List<VendorListingVendorRes> getListForVendor(Long userId);
 
-	List<VendorListingVendorRes> findByVendorUserIdAndDeletedFalse(Long userId);
 	
 	 VendorListing findByIdAndVendorUserIdAndDeletedFalse(Long id, Long userId);
 }		
