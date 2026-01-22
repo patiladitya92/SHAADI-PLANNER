@@ -63,10 +63,10 @@ public class User implements UserDetails{
     private boolean deleted = false;
     
 	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return List.of(new SimpleGrantedAuthority(this.role.name()));
-	}
+		public Collection<? extends GrantedAuthority> getAuthorities() {
+			// TODO Auto-generated method stub
+			return List.of(new SimpleGrantedAuthority(this.role.name()));
+		}
 
 	@Override
 	public String getUsername() {

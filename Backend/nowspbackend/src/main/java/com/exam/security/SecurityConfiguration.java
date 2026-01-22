@@ -38,7 +38,7 @@ public class SecurityConfiguration {
 		// 4. Specify URL based authorization rules
 		http.authorizeHttpRequests(req -> req
 		        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**",
-		                "/api/auth/login", "/api/auth/register")
+		                "/api/auth/login", "/api/auth/register","/api/auth/forgot-password","/api/auth/reset-password")
 		        .permitAll()
 		        .requestMatchers("/api/admin/**").hasRole("ADMIN")
 		        .requestMatchers("/api/vendors/**").hasRole("VENDOR")

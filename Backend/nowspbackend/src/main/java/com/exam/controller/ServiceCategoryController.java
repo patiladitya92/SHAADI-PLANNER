@@ -20,4 +20,6 @@ public class ServiceCategoryController {
 	public ResponseEntity<?> getAllServiceCategory(){
 		return ResponseEntity.status(HttpStatus.OK).body(serviceCategory.getAllService());
 	}
+	
+	
 }

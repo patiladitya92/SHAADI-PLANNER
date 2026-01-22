@@ -1,6 +1,7 @@
 package com.exam.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -48,4 +49,8 @@ public interface VendorListRepo extends JpaRepository<VendorListing, Long>{
 
 	
 	 VendorListing findByIdAndVendorUserIdAndDeletedFalse(Long id, Long userId);
+	 
+	 
+	 @Query("SELECT l FROM VendorListing l WHERE l.id = ?1 AND l.deleted = false")
+	    Optional<VendorListing> findActiveById(Long id);
 }		
