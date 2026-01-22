@@ -1,6 +1,5 @@
 package com.exam.controller;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,7 +13,6 @@ import com.exam.dto.AuthRes;
 import com.exam.dto.LoginReq;
 import com.exam.entities.User;
 import com.exam.security.JwtUtils;
-import com.exam.dto.AuthRes;
 
 import lombok.AllArgsConstructor;
 

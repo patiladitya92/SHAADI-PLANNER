@@ -1,6 +1,7 @@
 package com.exam.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -35,5 +36,9 @@ public interface BookingsRepo extends JpaRepository<Booking, Long>{
         order by b.bookdate desc
         """)
 	List<BookingRes> getAllBookings(Long id);
+	List<Booking> findAllByDeletedFalse();
+    Optional<Booking> findByIdAndCustUserEmailAndDeletedFalse(Long id, String customerEmail);
+
+
 
 }

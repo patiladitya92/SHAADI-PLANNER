@@ -1,0 +1,13 @@
+package com.exam.repository;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.exam.entities.Customer;
+
+public interface CustomerRepo extends JpaRepository<Customer, Long> {
+	 List<Customer> findAllByDeletedFalse();
+	 Optional<Customer> findByIdAndDeletedFalse(Long id);
+}
