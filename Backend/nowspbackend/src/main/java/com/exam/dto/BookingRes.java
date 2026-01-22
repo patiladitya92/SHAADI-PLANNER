@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 
 import com.exam.entities.BookingStatus;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

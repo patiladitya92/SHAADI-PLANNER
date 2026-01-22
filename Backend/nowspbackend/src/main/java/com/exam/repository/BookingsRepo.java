@@ -37,6 +37,7 @@ public interface BookingsRepo extends JpaRepository<Booking, Long>{
         order by b.bookdate desc
         """)
 	List<BookingRes> getAllBookings(Long id);
+
 	 
 	 
 	 @Query("""
@@ -75,6 +76,10 @@ public interface BookingsRepo extends JpaRepository<Booking, Long>{
 			    """)
 			Optional<BookingRes> findBookingResById(Long id); 
 
+
+
+	List<Booking> findAllByDeletedFalse();
+    Optional<Booking> findByIdAndCustUserEmailAndDeletedFalse(Long id, String customerEmail);
 
 
 
