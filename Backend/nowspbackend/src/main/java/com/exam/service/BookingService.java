@@ -45,26 +45,18 @@ public class BookingService {
 
 	
 	   public BookingCreateRes createBooking(Long userId, BookingCreateReq req) {
-	        
-	      
-	    
 	        Customer customer = customerRepo.findByUserId(userId)
 	            .orElseThrow(() -> new ResourceNotFoundException("Customer not found for userId: " + userId));
-
-	        
 	        VendorListing listing = vendorListingRepo.findActiveById(req.getListingId())
 	            .orElseThrow(() -> new ResourceNotFoundException("Listing not found or inactive: " + req.getListingId()));
-
 	        // 3. Business validation: future event date
 	        if (req.getEventdate().isBefore(LocalDate.now())) {
 	            throw new IllegalArgumentException("Event date must be in the future");
 	        }
-
 	        // 4. Check if listing vendor is active
 	        if (listing.getVendor().isDeleted() || !listing.getVendor().isAvail()) {
 	            throw new IllegalArgumentException("Vendor is inactive or unavailable");
 	        }
-
 	        // 5. Create new booking
 	        Booking booking = new Booking();
 	        booking.setCust(customer);

@@ -2,7 +2,6 @@ package com.exam.dto;
 
 import java.math.BigDecimal;
 
-import com.exam.entities.PaymentMode;
 
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
@@ -20,5 +19,5 @@ public class PaymentCreateDto {
     private BigDecimal amt;
     
     @NotNull
-    private PaymentMode mode;
+    private String mode;
 }

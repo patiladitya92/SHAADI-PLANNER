@@ -10,6 +10,7 @@ import com.exam.dto.CategoryReq;
 import com.exam.dto.CategoryUpdate;
 import com.exam.dto.ServiceCatDto;
 import com.exam.entities.ServiceCategory;
+import com.exam.exception.ResourceNotFoundException;
 import com.exam.repository.ServiceCatRepo;
 
 import lombok.AllArgsConstructor;
@@ -42,7 +43,7 @@ public class ServiceCatImpl implements ServiceCat {
 
 	@Override
 	public String updateCategory(Long id, CategoryUpdate dto) {
-		ServiceCategory category = serviceCatRepo.findByIdAndDeletedFalse(id).orElseThrow();
+		ServiceCategory category = serviceCatRepo.findByIdAndDeletedFalse(id).orElseThrow(() -> new ResourceNotFoundException("Service category not found: " + id));
 		    
 		    if (serviceCatRepo.existsByNameIgnoreCaseAndIdNot(dto.getName(), id)) {
 		        return "category already present";
@@ -55,7 +56,7 @@ public class ServiceCatImpl implements ServiceCat {
 
 	@Override
 	public String deleteCategory(Long id) {
-		ServiceCategory category = serviceCatRepo.findByIdAndDeletedFalse(id).orElseThrow();
+		ServiceCategory category = serviceCatRepo.findByIdAndDeletedFalse(id).orElseThrow(() -> new ResourceNotFoundException("Service category not found: " + id));
 		    category.setDeleted(true);
 		    serviceCatRepo.save(category);
 		    return "deleted";

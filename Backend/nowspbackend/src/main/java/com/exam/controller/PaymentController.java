@@ -1,31 +1,57 @@
 package com.exam.controller;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import com.exam.dto.JwtDTO;
 import com.exam.dto.PaymentCreateDto;
-import com.exam.service.PaymentService;
+import com.exam.dto.PaymentRes;
+import com.exam.service.PaymentServiceImpl;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/payments")
 @AllArgsConstructor
 public class PaymentController {
-	
-	private final PaymentService paymentService;
-	
-	@PostMapping("/booking/{bookingId}")
-	@PreAuthorize("hasRole('CUSTOMER')")
-	public ResponseEntity<?> createPayment(Authentication auth, @PathVariable Long bookingId, @RequestBody PaymentCreateDto dto) {
-		String email = auth.getName();
-	    return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.createPayment(email, bookingId, dto));
-	}
+
+    private final PaymentServiceImpl paymentService; 
+    
+    @PostMapping("/booking/{bookingId}")
+    @PreAuthorize("hasRole('CUSTOMER')")
+    public ResponseEntity<PaymentRes> createPayment(
+    		@AuthenticationPrincipal JwtDTO jwtdto,
+            @PathVariable Long bookingId,
+            @RequestBody PaymentCreateDto dto) {
+        
+        String email = jwtdto.getEmail();
+        System.out.println(email);
+        PaymentRes payment = paymentService.createPayment(email, bookingId, dto);
+        return ResponseEntity.status(201).body(payment);
+    }
+
+    // Customer: Get payment for my booking
+    @GetMapping("/booking/{bookingId}")
+    @PreAuthorize("hasRole('CUSTOMER')")
+    public ResponseEntity<PaymentRes> getByBookingForCustomer(
+    		@AuthenticationPrincipal JwtDTO jwtdto,
+            @PathVariable Long bookingId) {
+        
+        String email = jwtdto.getEmail();
+        PaymentRes payment = paymentService.getPaymentForCustomer(email, bookingId);
+        return ResponseEntity.ok(payment);
+    }
+
+    // Vendor: See payment for booking of my listing
+    @GetMapping("/vendor/booking/{bookingId}")
+    @PreAuthorize("hasRole('VENDOR')")
+    public ResponseEntity<PaymentRes> getByBookingForVendor(
+    		@AuthenticationPrincipal JwtDTO jwtdto,
+            @PathVariable Long bookingId) {
+        
+        String email = jwtdto.getEmail();
+        PaymentRes payment = paymentService.getPaymentForVendor(email, bookingId);
+        return ResponseEntity.ok(payment);
+    }
 }
