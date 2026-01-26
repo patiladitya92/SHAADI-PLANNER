@@ -1,7 +1,5 @@
 package com.exam.controller;
 
-import java.util.List;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.exam.dto.JwtDTO;
 import com.exam.dto.VendorListingReq;
-import com.exam.dto.VendorListingVendorRes;
 import com.exam.service.VendorList;
 
 import lombok.AllArgsConstructor;

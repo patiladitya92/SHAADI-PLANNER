@@ -5,6 +5,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,15 +22,14 @@ import com.exam.dto.ResetPasswordReq;
 import com.exam.dto.UserProfileRes;
 import com.exam.entities.User;
 import com.exam.security.JwtUtils;
-
 import com.exam.service.AuthService;
-
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 
 @RestController
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:3000"})
 @RequestMapping("/api/auth")
 @AllArgsConstructor
 public class AuthController {
@@ -72,6 +72,7 @@ public class AuthController {
 	     @PreAuthorize("isAuthenticated()")
 	     @GetMapping("/me")
 	     public ResponseEntity<?> me(Authentication auth) {
+	    	 
 	    	  JwtDTO dto = (JwtDTO) auth.getPrincipal();  // ✅ Full User object
 	    	    String email = dto.getEmail();   // JWT subject = email
 	         UserProfileRes profile = authService.getUserProfile(email);

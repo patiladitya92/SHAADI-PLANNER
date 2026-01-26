@@ -69,13 +69,48 @@ public class GlobalExceptionHandler {
                 .body(new ErrorResponse("Access denied", LocalDateTime.now()));
     }
 
-    // 5️⃣ Catch-all (last safety net)
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleGenericException(
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<ErrorResponse> handleException(
             Exception ex) {
 
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ErrorResponse(ex.getMessage(), LocalDateTime.now()));
+    }
+    @ExceptionHandler(ResourceAlreadyExistsException.class)
+    public ResponseEntity<ErrorResponse> handleResoruceException(
+            Exception ex) {
+
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(new ErrorResponse(ex.getMessage(), LocalDateTime.now()));
+    }
+    // 5️⃣ Catch-all (last safety net)
+    
+    
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleResorucenotException(
+            Exception ex) {
+
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(new ErrorResponse(ex.getMessage(), LocalDateTime.now()));
+    }
+    
+    @ExceptionHandler(ConflictException.class)
+    public ResponseEntity<ErrorResponse> handleConflictException(
+            Exception ex) {
+
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(new ErrorResponse(ex.getMessage(), LocalDateTime.now()));
+    }
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> handleGenericException(
+    		Exception ex) {
+    	
+    	return ResponseEntity
+    			.status(HttpStatus.INTERNAL_SERVER_ERROR)
+    			.body(new ErrorResponse(ex.getMessage(), LocalDateTime.now()));
     }
 }

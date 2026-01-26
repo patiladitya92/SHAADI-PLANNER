@@ -36,18 +36,18 @@ public class CustomJwtFilter extends OncePerRequestFilter {
 		{
 			log.info("JWT found! ");
 			String jwt=authHeaderValue.substring(7);
-			//validate JWT
+			
 			Claims claims = jwtUtils.validateToken(jwt);
-			//get user id , email , role - DTO
+			
 			Long userId=claims.get("userId", Long.class);
 			String role=claims.get("role",String.class);
 			String email=claims.getSubject();
 			JwtDTO dto=new JwtDTO(userId, email, role);
-			//create Authentication object
+			
 			UsernamePasswordAuthenticationToken token=
 					new UsernamePasswordAuthenticationToken(dto, 
 							null, List.of(new SimpleGrantedAuthority(role)));
-			//save auth object under sec ctx holder
+			
 			SecurityContextHolder.getContext().setAuthentication(token);
 			log.info("auth info stored in sec ctx.....");
 		}
