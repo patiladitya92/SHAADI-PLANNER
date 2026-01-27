@@ -3,6 +3,7 @@ import { Toaster } from 'react-hot-toast'
 import Navbar from './components/common/Navbar'
 import ProtectedRoute from './components/common/ProtectedRoute'
 
+import VendorListings from './pages/vendor/VendorListings'
 import Login from './pages/auth/Login'
 import CustomerHome from './pages/customer/CustomerHome'
 import VendorDetail from './pages/customer/VendorDetail'
@@ -23,7 +24,7 @@ function App() {
           <Route path="/customer/home" element={<CustomerHome />} />
           <Route path="/customer/vendor/:id" element={<VendorDetail />} />
           <Route path="/customer/mybookings" element={<CustomerMyBookings />} />
-
+          <Route path="/vendor/listings" element={<VendorListings />} />
           <Route path="/vendor/dashboard" element={<VendorDashboard />} />
           <Route path="/vendor/bookings" element={<VendorBookings />} />
         </Route>

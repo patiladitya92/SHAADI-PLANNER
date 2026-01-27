@@ -140,6 +140,18 @@ const Navbar = () => {
                   📊 Dashboard
                 </button>
 
+
+                <button
+                  onClick={() => navigate('/vendor/listings')}
+                  className={`px-4 py-2 rounded-xl font-semibold shadow-md text-sm ${
+                    isActive('/vendor/listings')
+                      ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white'
+                      : 'bg-white/50 text-gray-700 hover:bg-emerald-50'
+                  }`}
+                >
+                  📝 Listings
+                </button>
+
                 <button
                   onClick={() => navigate('/vendor/bookings')}
                   className={`px-4 py-2 rounded-xl font-semibold shadow-md text-sm ${
