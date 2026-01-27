@@ -3,6 +3,7 @@ package com.exam.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import com.exam.service.VendorList;
 import lombok.AllArgsConstructor;
 
 @RestController
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:3000"})
 @RequestMapping
 @AllArgsConstructor
 public class VendorListingController {
@@ -31,7 +33,10 @@ public class VendorListingController {
 		return ResponseEntity.ok(vendorList.getVendorList(city, catId));
 	}
 	
-	
+	 @GetMapping("/api/listings/{id}")
+	    public ResponseEntity<?> getListingById(@PathVariable Long id) {
+	        return ResponseEntity.ok(vendorList.getListingById(id));
+	    }
 	 
 	@GetMapping("/api/vendors/me/listings")
 	@PreAuthorize("hasRole('VENDOR')")

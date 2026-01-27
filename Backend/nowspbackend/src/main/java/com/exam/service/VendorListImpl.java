@@ -1,6 +1,7 @@
 package com.exam.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import com.exam.dto.VendorListingReq;
 import com.exam.dto.VendorListingVendorRes;
 import com.exam.entities.Vendor;
 import com.exam.entities.VendorListing;
+import com.exam.exception.ResourceNotFoundException;
 import com.exam.repository.VendorListRepo;
 import com.exam.repository.VendorRepo;
 
@@ -83,6 +85,28 @@ public class VendorListImpl implements VendorList{
 		temp.setDeleted(true);
 		
 		return "deleted";
+	}
+
+
+
+	@Override
+	public VendorListDto getListingById(Long id) {
+		VendorListing t = vendorListRepo.findById(id).orElseThrow(() ->new ResourceNotFoundException("id is wrong for listing"));
+		VendorListDto temo = new VendorListDto();
+		temo.setCatname(t.getVendor().getCat().getName());
+		temo.setCity(t.getVendor().getCity());
+		temo.setDescription(t.getDescription());
+		temo.setId(id);
+		temo.setPhotourl(t.getPhotourl());
+		temo.setPrice(t.getPrice());
+		temo.setTitle(t.getTitle());
+		temo.setVendorid(t.getVendor().getId());
+		temo.setVendorname(t.getVendor().getUser().getName());
+		
+		
+		
+		
+		return temo;
 	}
 
 	

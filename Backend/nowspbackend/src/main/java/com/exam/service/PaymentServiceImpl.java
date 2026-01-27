@@ -36,14 +36,14 @@ public class PaymentServiceImpl implements PaymentService {
             .filter(b -> !b.isDeleted())
             .orElseThrow(() -> new ResourceNotFoundException("Booking not found: " + bookingId));
 
-        if (!booking.getStatus().equals(BookingStatus.PENDING)) {
-            throw new IllegalStateException("Only PENDING bookings can be paid");
+        if (!booking.getStatus().equals(BookingStatus.ACCEPTED)) {
+            throw new IllegalStateException("Only ACCEPTED bookings can be paid");
         }
-
+        
         if (paymentRepo.existsByBookingId(bookingId)) {
             throw new ResourceAlreadyExistsException("Payment already exists");
         }
-
+        
         // ✅ REAL RAZORPAY ORDER
         String orderId;
         try {
@@ -74,6 +74,8 @@ public class PaymentServiceImpl implements PaymentService {
         payment.setPaydate(LocalDateTime.now());
         
         Payment saved = paymentRepo.save(payment);
+        booking.setStatus(BookingStatus.PAID);
+        bookingsRepo.save(booking);
 
         // Response with Razorpay order_id
         PaymentRes res = new PaymentRes();

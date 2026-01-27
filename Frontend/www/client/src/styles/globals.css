@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Wedding Booking Platform - Custom Theme */
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+/* Reusable wedding components */
+@layer components {
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-md border border-white/50 shadow-xl rounded-2xl;
+  }
+  
+  .wedding-btn {
+    @apply bg-gradient-to-r from-rose-500 via-pink-500 to-purple-500 
+           text-white px-8 py-4 rounded-xl font-semibold 
+           hover:scale-105 hover:shadow-2xl transition-all duration-300;
+  }
+  
+  .hero-gradient {
+    @apply bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-100;
+  }
+}

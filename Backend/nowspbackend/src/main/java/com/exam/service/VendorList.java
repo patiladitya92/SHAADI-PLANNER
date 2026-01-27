@@ -16,4 +16,6 @@ public interface VendorList {
 	public String updateMyListing(Long userId, Long id, VendorListingReq dto2);
 	
 	public String deleteMyListing(Long listid);
+
+	public  VendorListDto getListingById(Long id);
 }
