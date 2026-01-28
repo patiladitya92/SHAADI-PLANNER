@@ -18,6 +18,7 @@ import com.exam.entities.Customer;
 import com.exam.entities.Payment;
 import com.exam.entities.User;
 import com.exam.entities.Vendor;
+import com.exam.exception.ResourceNotFoundException;
 import com.exam.repository.BookingsRepo;
 import com.exam.repository.CustomerRepo;
 import com.exam.repository.PaymentRepo;
@@ -25,10 +26,12 @@ import com.exam.repository.UserRepository;
 import com.exam.repository.VendorRepo;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Transactional
 @AllArgsConstructor
+@Slf4j
 public class AdminServiceImpl implements AdminService {
 
 	private final UserRepository userRepository;
@@ -153,6 +156,24 @@ public class AdminServiceImpl implements AdminService {
 	    }
 	    return list;
 	}
+	
+	public User getUserById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+    }
+	
+	 public boolean toggleUserDeleted(Long userId) {
+	        log.info("🔄 Admin toggling deleted status for user: {}", userId);  // ✅ Works
+	        
+	        User user = userRepository.findById(userId)
+	                .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));  // ✅ Generic exception
+	        
+	        user.setDeleted(!user.isDeleted());  // ✅ Changed to deleted field
+	        userRepository.save(user);
+	        
+	        log.info("✅ User {} deleted status: {}", userId, user.isDeleted());
+	        return user.isDeleted();
+	    }
 
 
 

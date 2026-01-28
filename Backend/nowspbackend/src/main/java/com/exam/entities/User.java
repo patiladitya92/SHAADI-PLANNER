@@ -27,7 +27,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 @AllArgsConstructor
 @ToString
 public class User implements UserDetails{
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;          // user id
@@ -60,7 +59,7 @@ public class User implements UserDetails{
     private LocalDateTime updatedAt;
 
     @Column(nullable = false)
-    private boolean deleted = false;
+    private boolean deleted = true;
     
 	@Override
 		public Collection<? extends GrantedAuthority> getAuthorities() {

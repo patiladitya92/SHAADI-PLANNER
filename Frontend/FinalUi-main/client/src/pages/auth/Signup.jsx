@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
-import apiClient from '../../utils/api.js'
+import apiClient from '../../utils/api'
 
 const Signup = () => {
   const navigate = useNavigate()
@@ -10,10 +10,25 @@ const Signup = () => {
     email: '',
     phone: '',
     password: '',
-    role: 'CUSTOMER'
+    role: 'ROLE_CUSTOMER'
   })
   const [loading, setLoading] = useState(false)
+  const [categories, setCategories] = useState([])
   const [showVendorFields, setShowVendorFields] = useState(false)
+
+  useEffect(() => {
+    fetchCategories()
+  }, [])
+
+  const fetchCategories = async () => {
+    try {
+      const response = await apiClient.get('/categories')
+      const cats = response.data.data || response.data || []
+      setCategories(Array.isArray(cats) ? cats : [])
+    } catch (error) {
+      console.error('Categories fetch failed:', error)
+    }
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -22,26 +37,19 @@ const Signup = () => {
       [name]: value
     }))
     
-    // Show vendor fields when role changes to VENDOR
-    if (name === 'role' && value === 'VENDOR') {
+    if (name === 'role' && value === 'ROLE_VENDOR') {
       setShowVendorFields(true)
     }
   }
 
   const validateVendorFields = () => {
-    if (formData.role !== 'VENDOR') return true
-    
-    return formData.bizname && 
-           formData.addr && 
-           formData.city && 
-           formData.state && 
-           formData.catId
+    if (formData.role !== 'ROLE_VENDOR') return true
+    return formData.bizname && formData.addr && formData.city && formData.state && formData.catId
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     
-    // Validate vendor fields
     if (!validateVendorFields()) {
       toast.error('Vendors must fill ALL business fields!')
       return
@@ -51,15 +59,17 @@ const Signup = () => {
     try {
       console.log('📤 Registering:', formData)
       
-      // ✅ MATCHES YOUR BACKEND RegisterReq DTO
+      // ✅ FIXED: Handle ApiResponse wrapper
       const response = await apiClient.post('/auth/register', formData)
+      console.log('✅ Register response:', response.data)
       
       toast.success('✅ Account created! Please login.')
       setTimeout(() => navigate('/login'), 2000)
       
     } catch (error) {
       console.error('❌ Register error:', error.response?.data)
-      toast.error(error.response?.data?.message || 'Registration failed')
+      const errorMsg = error.response?.data?.message || error.response?.data?.data?.message || 'Registration failed'
+      toast.error(errorMsg)
     } finally {
       setLoading(false)
     }
@@ -76,7 +86,7 @@ const Signup = () => {
         </div>
         
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* BASIC FIELDS - ALWAYS SHOW */}
+          {/* BASIC FIELDS */}
           <div className="grid md:grid-cols-2 gap-6">
             <input
               name="name"
@@ -86,8 +96,8 @@ const Signup = () => {
               onChange={handleChange}
               className="p-4 rounded-2xl border-2 border-gray-200 focus:ring-4 focus:ring-pink-200 focus:border-pink-400 transition-all text-lg"
               required
+              disabled={loading}
             />
-            
             <input
               name="phone"
               type="tel"
@@ -96,6 +106,7 @@ const Signup = () => {
               onChange={handleChange}
               className="p-4 rounded-2xl border-2 border-gray-200 focus:ring-4 focus:ring-purple-200 focus:border-purple-400 transition-all text-lg"
               required
+              disabled={loading}
             />
           </div>
 
@@ -107,30 +118,34 @@ const Signup = () => {
             onChange={handleChange}
             className="w-full p-4 rounded-2xl border-2 border-gray-200 focus:ring-4 focus:ring-blue-200 focus:border-blue-400 transition-all text-lg"
             required
+            disabled={loading}
           />
 
           <input
             name="password"
             type="password"
-            placeholder="Password"
+            placeholder="Password (min 6 chars)"
             value={formData.password}
             onChange={handleChange}
             className="w-full p-4 rounded-2xl border-2 border-gray-200 focus:ring-4 focus:ring-pink-200 focus:border-pink-400 transition-all text-lg"
             required
+            minLength={6}
+            disabled={loading}
           />
 
-          {/* ✅ ROLE SELECTOR */}
+          {/* ROLE SELECTOR */}
           <select
             name="role"
             value={formData.role}
             onChange={handleChange}
             className="w-full p-4 rounded-2xl border-2 border-gray-200 focus:ring-4 focus:ring-indigo-200 focus:border-indigo-400 transition-all text-lg"
+            disabled={loading}
           >
-            <option value="CUSTOMER">👰‍♀️ Customer</option>
-            <option value="VENDOR">💼 Wedding Vendor</option>
+            <option value="ROLE_CUSTOMER">👰‍♀️ Customer</option>
+            <option value="ROLE_VENDOR">💼 Wedding Vendor</option>
           </select>
 
-          {/* ✅ VENDOR FIELDS - CONDITIONAL */}
+          {/* VENDOR FIELDS */}
           {showVendorFields && (
             <div className="space-y-4 pt-6 border-t-2 border-dashed border-purple-200 bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-3xl">
               <h3 className="text-2xl font-bold text-purple-800 text-center">
@@ -145,9 +160,9 @@ const Signup = () => {
                   value={formData.bizname || ''}
                   onChange={handleChange}
                   className="p-4 rounded-2xl border-2 border-purple-200 focus:ring-4 focus:ring-purple-300 focus:border-purple-500 transition-all text-lg bg-purple-50"
-                  required
+                  required={formData.role === 'ROLE_VENDOR'}
+                  disabled={loading}
                 />
-                
                 <input
                   name="city"
                   type="text"
@@ -155,7 +170,8 @@ const Signup = () => {
                   value={formData.city || ''}
                   onChange={handleChange}
                   className="p-4 rounded-2xl border-2 border-purple-200 focus:ring-4 focus:ring-purple-300 focus:border-purple-500 transition-all text-lg bg-purple-50"
-                  required
+                  required={formData.role === 'ROLE_VENDOR'}
+                  disabled={loading}
                 />
               </div>
               
@@ -167,9 +183,9 @@ const Signup = () => {
                   value={formData.addr || ''}
                   onChange={handleChange}
                   className="p-4 rounded-2xl border-2 border-purple-200 focus:ring-4 focus:ring-purple-300 focus:border-purple-500 transition-all text-lg bg-purple-50 md:col-span-2"
-                  required
+                  required={formData.role === 'ROLE_VENDOR'}
+                  disabled={loading}
                 />
-                
                 <input
                   name="state"
                   type="text"
@@ -177,23 +193,23 @@ const Signup = () => {
                   value={formData.state || ''}
                   onChange={handleChange}
                   className="p-4 rounded-2xl border-2 border-purple-200 focus:ring-4 focus:ring-purple-300 focus:border-purple-500 transition-all text-lg bg-purple-50"
-                  required
+                  required={formData.role === 'ROLE_VENDOR'}
+                  disabled={loading}
                 />
-                
                 <select
                   name="catId"
                   value={formData.catId || ''}
                   onChange={handleChange}
                   className="p-4 rounded-2xl border-2 border-purple-200 focus:ring-4 focus:ring-purple-300 focus:border-purple-500 transition-all text-lg bg-purple-50"
-                  required
+                  required={formData.role === 'ROLE_VENDOR'}
+                  disabled={loading}
                 >
                   <option value="">Select Category</option>
-                  <option value="1">👗 Bridal Wear</option>
-                  <option value="2">📸 Photography</option>
-                  <option value="3">🎵 Music Band</option>
-                  <option value="4">💄 Makeup Artist</option>
-                  <option value="5">🎂 Caterers</option>
-                  <option value="6">🏨 Venue</option>
+                  {categories.map(cat => (
+                    <option key={cat.id} value={cat.id}>
+                      {cat.name}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
@@ -219,9 +235,9 @@ const Signup = () => {
           <button
             onClick={() => navigate('/login')}
             className="text-pink-600 hover:text-pink-700 font-semibold text-xl transition-all duration-200 hover:underline flex items-center justify-center space-x-2 mx-auto"
+            disabled={loading}
           >
-            <span>👈 Already have account?</span>
-            <span>Login Now</span>
+            👈 Already have account? Login Now
           </button>
         </div>
       </div>

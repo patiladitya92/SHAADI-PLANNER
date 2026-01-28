@@ -1,5 +1,7 @@
 package com.exam.controller;
 
+import java.util.Map;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,12 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.exam.service.AdminService;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:3000"})
 @RequestMapping("/api/admin")
 @PreAuthorize("hasRole('ADMIN')")
 @AllArgsConstructor
+@Slf4j
 public class AdminController {
 	
 	public final AdminService adminService;
@@ -48,5 +52,21 @@ public class AdminController {
 	 public ResponseEntity<?> getAllPayments() { 
 		 return ResponseEntity.ok(adminService.getAllPayments());
 	 }
+	 
+	 @PutMapping("/users/{id}/toggle-active")
+	    public ResponseEntity<?> toggleUserActive(@PathVariable Long id) {
+	        log.info("Admin toggling user active status: {}", id);
+	        
+	        boolean isActive = adminService.toggleUserDeleted(id);
+	        
+	        return ResponseEntity.ok(Map.of(
+	            "success", true,
+	            "message", isActive ? "User activated" : "User deactivated",
+	            "userId", id,
+	            "isActive", isActive
+	        ));
+	    }
+	 
+	 
 	
 }

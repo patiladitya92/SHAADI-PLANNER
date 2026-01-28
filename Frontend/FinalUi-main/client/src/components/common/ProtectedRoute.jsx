@@ -15,10 +15,8 @@ const ProtectedRoute = () => {
       path: location.pathname
     })
 
-    if (
-      token &&
-      (role === 'ROLE_CUSTOMER' || role === 'ROLE_VENDOR')
-    ) {
+    // ✅ FIXED: Exact role matches from backend
+    if (token && (role === 'ROLE_CUSTOMER' || role === 'ROLE_VENDOR' || role === 'ROLE_ADMIN')) {
       setIsAuthenticated(true)
     } else {
       localStorage.setItem('intendedPath', location.pathname)
@@ -26,23 +24,18 @@ const ProtectedRoute = () => {
     }
   }, [location.pathname])
 
-  // ⏳ while checking
   if (isAuthenticated === null) {
     return (
       <div className="min-h-screen flex items-center justify-center pt-24">
-        <div className="text-xl text-gray-600">
-          Checking authentication...
-        </div>
+        <div className="text-xl text-gray-600 animate-pulse">Checking authentication...</div>
       </div>
     )
   }
 
-  // ❌ not logged in
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />
+    return <Navigate to="/login" replace state={{ from: location }} />
   }
 
-  // ✅ logged in
   return <Outlet />
 }
 

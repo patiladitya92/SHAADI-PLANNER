@@ -16,5 +16,7 @@ public interface AdminService {
 	public List<CustomerAdminDto> getAllCustomers();
 	public List<BookingRes> getAllBookings();
 	public List<PaymentAdminDto> getAllPayments();
+	public boolean toggleUserDeleted(Long userId);
+
 	
 }

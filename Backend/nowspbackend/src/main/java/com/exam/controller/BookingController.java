@@ -41,9 +41,6 @@ public class BookingController {
 	    
 	}
 	
-	
-
-	
 	@PreAuthorize("hasRole('CUSTOMER')")
 	@PostMapping
 	public ResponseEntity<?> createBooking(@AuthenticationPrincipal JwtDTO dto, 
@@ -52,23 +49,22 @@ public class BookingController {
 	        .body(bookingService.createBooking(dto.getUserId(), bookdto));
 	}
 	
-	   @GetMapping("/vendor/me")
-	  @PreAuthorize("hasRole('VENDOR')")
-	  public ResponseEntity<?> getVendorBookings(@AuthenticationPrincipal JwtDTO dto) {
-		   
+	 @GetMapping("/vendor/me")
+	 @PreAuthorize("hasRole('VENDOR')")
+	 public ResponseEntity<?> getVendorBookings(@AuthenticationPrincipal JwtDTO dto) { 
 		   return ResponseEntity.ok(bookingService.getVendorBookings(dto.getUserId()));
-	   }
+	 }
 	   
 	   
-	   @PutMapping("/{id}/status")
-	   @PreAuthorize("hasRole('VENDOR')")
-	   public ResponseEntity<?> updateStatus(
+	  @PutMapping("/{id}/status")
+	  @PreAuthorize("hasRole('VENDOR')")
+	  public ResponseEntity<?> updateStatus(
 	           @AuthenticationPrincipal JwtDTO dto,
 	           @PathVariable Long id,
 	           @RequestBody @Valid BookingStatusUpdateReq req) {
 	       
-	       BookingStatusResponse result = bookingService.updateBookingStatus(dto.getUserId(), id, req.getStatus());
-	       return ResponseEntity.ok(new ApiResponse<>(true, result, "Status updated successfully"));
+	   BookingStatusResponse result = bookingService.updateBookingStatus(dto.getUserId(), id, req.getStatus());
+	   return ResponseEntity.ok(new ApiResponse<>(true, result, "Status updated successfully"));
 	   }
 	   
 	   
