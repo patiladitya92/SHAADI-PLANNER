@@ -24,19 +24,19 @@ public class Booking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;              // booking id
+    private Long id;              
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cust_id", nullable = false)
-    private Customer cust;        // customer
+    private Customer cust;       
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vendor_id", nullable = false)
-    private Vendor vendor;        // vendor
+    private Vendor vendor;       
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "list_id", nullable = false)
-    private VendorListing list;   // selected listing
+    private VendorListing list;   
 
     @Column(nullable = false)
     private LocalDate eventdate;  // event date

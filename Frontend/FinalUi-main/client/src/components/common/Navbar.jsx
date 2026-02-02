@@ -71,7 +71,7 @@ const Navbar = () => {
         {/* ✅ FIXED: Logo ALWAYS goes to landing */}
         <div
           className="text-3xl font-black bg-gradient-to-r from-rose-600 via-pink-600 to-purple-600 bg-clip-text text-transparent cursor-pointer hover:scale-105 transition-all duration-300 select-none"
-          onClick={() => navigate('/')}  // ✅ ALWAYS LANDING PAGE
+          onClick={() => navigate('/')}  
           title="Shaadi Planner"
         >
           Shaadi Planner ✨

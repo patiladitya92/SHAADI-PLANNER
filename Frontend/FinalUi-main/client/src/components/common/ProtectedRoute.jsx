@@ -15,7 +15,7 @@ const ProtectedRoute = () => {
       path: location.pathname
     })
 
-    // ✅ FIXED: Exact role matches from backend
+    
     if (token && (role === 'ROLE_CUSTOMER' || role === 'ROLE_VENDOR' || role === 'ROLE_ADMIN')) {
       setIsAuthenticated(true)
     } else {

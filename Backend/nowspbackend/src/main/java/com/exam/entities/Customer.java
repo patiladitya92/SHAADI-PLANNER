@@ -23,13 +23,13 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;          // customer id
+    private Long id;        
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false, unique = true)
-    private User user;        // linked user
+    private User user;       
 
-    private String addr;      // address
+    private String addr;      
     private String city;
     private String state;
 

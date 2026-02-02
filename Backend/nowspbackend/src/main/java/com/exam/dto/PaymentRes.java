@@ -1,9 +1,6 @@
 package com.exam.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -14,8 +11,9 @@ import java.time.LocalDateTime;
 public class PaymentRes {
     private Long id;
     private BigDecimal amt;
-    private String status;           // PENDING, SUCCESS, FAILED
+    private String status;
     private String mode;
+    private String razorpayOrderId; 
     private String txnid;
     private LocalDateTime paydate;
     private Long bookingId;

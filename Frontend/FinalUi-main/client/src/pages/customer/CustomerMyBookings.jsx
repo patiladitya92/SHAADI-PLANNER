@@ -20,9 +20,61 @@ const CustomerMyBookings = () => {
     }
   }
 
-  const handlePayment = (booking) => {
-    toast.success(`Payment of ₹${booking.amt} successful (mock)`)
-    // 🔴 Real payment integration can come later
+  const handlePayment = async (booking) => {
+    try {
+      // 1️⃣ Create payment + Razorpay order
+      const res = await apiClient.post(
+        `/payments/booking/${booking.id}`,
+        {
+          amt: booking.amt,
+          mode: 'UPI'
+        }
+      )
+
+      const payment = res.data
+
+      // 2️⃣ Razorpay Checkout
+      const options = {
+        key: 'rzp_test_S72CntxmHZ005O', // ✅ KEY ID ONLY
+        amount: payment.amt * 100,
+        currency: 'INR',
+        name: 'Shaadi Planner',
+        description: 'Wedding Service Booking',
+        order_id: payment.razorpayOrderId,
+
+       handler: async function (response) {
+  try {
+    await apiClient.post('/payments/verify', null, {
+      params: {
+        orderId: payment.razorpayOrderId
+      }
+    })
+
+    toast.success('Payment successful 🎉')
+
+    await fetchBookings()
+  } catch (err) {
+    toast.error('Payment verification failed')
+  }
+}
+,
+
+        prefill: {
+          email: localStorage.getItem('userEmail') || 'test@mail.com',
+          name: localStorage.getItem('userName') || 'Test User'
+        },
+
+        theme: {
+          color: '#ec4899'
+        }
+      }
+
+      const razorpay = new window.Razorpay(options)
+      razorpay.open()
+
+    } catch (error) {
+      toast.error('Payment initiation failed')
+    }
   }
 
   return (
@@ -34,12 +86,6 @@ const CustomerMyBookings = () => {
           <h3 className="text-xl font-bold">{b.listingTitle}</h3>
           <p>Status: {b.status}</p>
           <p>Amount: ₹{b.amt}</p>
-
-          {b.status === 'PENDING' && (
-            <p className="text-yellow-600 font-semibold">
-              Waiting for vendor approval
-            </p>
-          )}
 
           {b.status === 'ACCEPTED' && (
             <button

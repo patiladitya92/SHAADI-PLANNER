@@ -31,6 +31,17 @@ public class PaymentController {
         PaymentRes payment = paymentService.createPayment(email, bookingId, dto);
         return ResponseEntity.status(201).body(payment);
     }
+    @PostMapping("/verify")
+    @PreAuthorize("hasRole('CUSTOMER')")
+    public ResponseEntity<?> verifyPayment(
+            @AuthenticationPrincipal JwtDTO jwt,
+            @RequestParam String orderId
+    ) {
+    	
+        paymentService.markPaymentSuccess(orderId);
+        return ResponseEntity.ok().build();
+    }
+
 
     // Customer: Get payment for my booking
     @GetMapping("/booking/{bookingId}")

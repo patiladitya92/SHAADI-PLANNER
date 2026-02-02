@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-// YOUR BACKEND - Confirmed from your paste.txt
+
 const API_BASE_URL = 'http://localhost:8080/api'
 
 const apiClient = axios.create({
