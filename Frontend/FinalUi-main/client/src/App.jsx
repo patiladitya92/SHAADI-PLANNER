@@ -2,11 +2,12 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { Toaster } from 'react-hot-toast'
 import Navbar from './components/common/Navbar'                    // ✅ FIXED: components/Navbar
 import ProtectedRoute from './components/common/ProtectedRoute'    // ✅ FIXED: components/ProtectedRoute
-
+import PaymentSuccess from './pages/payment/PaymentSuccess'
 // Auth Pages
 import Login from './pages/auth/Login'
 import Signup from './pages/auth/Signup'
-
+import ForgotPasswordPage from './pages/auth/ForgotPasswordPage'
+import ResetPasswordPage from './pages/auth/ResetPasswordPage'
 // Public Landing
 import LandingHome from './pages/home/LandingHome'
 
@@ -52,7 +53,9 @@ function App() {
           {/* PUBLIC AUTH */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          
+          <Route path="/payment-success" element={<PaymentSuccess />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
           {/* PROTECTED ROUTES */}
           <Route element={<ProtectedRoute />}>
             {/* Customer */}

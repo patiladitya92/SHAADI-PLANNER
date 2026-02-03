@@ -1,4 +1,3 @@
-
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 const BASE_URL = 'http://localhost:8080/api'  // YOUR BACKEND
@@ -30,10 +29,12 @@ export const authApi = createApi({
         return { token, userId: id, email, name, role }
       },
     }),
+    
     getMe: builder.query({
       query: () => '/auth/me',
       providesTags: ['Auth'],
     }),
+    
     logout: builder.mutation({
       query: () => ({
         url: '/auth/logout',
@@ -41,7 +42,36 @@ export const authApi = createApi({
       }),
       invalidatesTags: ['Auth'],
     }),
+
+      // src/features/auth/authApi.js - VERIFY THIS
+    forgotPassword: builder.mutation({
+      query: (body) => ({  // ✅ body param
+        url: '/auth/forgot-password',
+        method: 'POST',
+        body: { email: body.email || body }  // ✅ Force object format
+      }),
+    }),
+
+
+    // ✅ NEW: Reset Password
+    resetPassword: builder.mutation({
+      query: ({ token, newPassword }) => ({
+        url: '/auth/reset-password',
+        method: 'POST',
+        body: { 
+          token, 
+          newPassword  // Matches ResetPasswordReq DTO
+        },
+      }),
+    }),
   }),
 })
 
-export const { useLoginMutation, useGetMeQuery, useLogoutMutation } = authApi
+// ✅ UPDATED: Export ALL hooks
+export const { 
+  useLoginMutation, 
+  useGetMeQuery, 
+  useLogoutMutation,
+  useForgotPasswordMutation,  // ✅ NEW
+  useResetPasswordMutation    // ✅ NEW
+} = authApi

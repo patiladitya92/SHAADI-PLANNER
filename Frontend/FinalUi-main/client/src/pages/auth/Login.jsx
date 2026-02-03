@@ -106,6 +106,13 @@ const Login = () => {
               disabled={loading}
             />
           </div>
+          
+          <div className="text-right mt-2">
+            <a href="/forgot-password" className="text-sm text-blue-600 hover:text-blue-700">
+              Forgot Password?
+            </a>
+          </div>
+
 
           <button
             type="submit"

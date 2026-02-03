@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class PaymentController {
 
-    private final PaymentServiceImpl paymentService; 
+    private final PaymentServiceImpl paymentService;
     
     @PostMapping("/booking/{bookingId}")
     @PreAuthorize("hasRole('CUSTOMER')")
