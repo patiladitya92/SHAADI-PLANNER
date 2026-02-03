@@ -24,7 +24,7 @@ const AdminDashboard = () => {
       fetchBookings()
     ])
 
-    const recent = bookings.slice(0, 5).reverse()
+    const recent = bookings.slice(0, 100).reverse()
 
     setStats({
       totalUsers: users.length,

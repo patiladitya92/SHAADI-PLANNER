@@ -18,7 +18,7 @@ public class EmailService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(toEmail);
         message.setSubject("Reset Your ServiceBooking Password");
-        message.setFrom("palroshan255793@gmail.com");  // Same as username above
+        message.setFrom("palroshan255793@gmail.com"); 
         
         message.setText("""
             Hi %s,
@@ -33,6 +33,6 @@ public class EmailService {
             """.formatted(userName, resetUrl));
         
         mailSender.send(message);
-        System.out.println("✅ Reset email sent to: " + toEmail);
+        System.out.println("Reset email sent to: " + toEmail);
     }
 }
