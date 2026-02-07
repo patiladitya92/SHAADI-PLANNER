@@ -1,23 +1,27 @@
 package com.exam.service;
 
-import com.exam.dto.PaymentCreateDto;
-import com.exam.dto.PaymentRes;
-import com.exam.entities.Payment;
-import com.exam.entities.PaymentStatus;
-import com.exam.entities.PaymentMode;
-import com.exam.entities.Booking;
-import com.exam.entities.BookingStatus;
-import com.exam.exception.ResourceNotFoundException;
-import com.exam.exception.ResourceAlreadyExistsException;
-import com.exam.repository.PaymentRepo;
-import com.exam.repository.BookingsRepo;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import com.razorpay.*;
-import org.json.JSONObject;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+
+import org.json.JSONObject;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.exam.dto.PaymentCreateDto;
+import com.exam.dto.PaymentRes;
+import com.exam.entities.Booking;
+import com.exam.entities.BookingStatus;
+import com.exam.entities.Payment;
+import com.exam.entities.PaymentMode;
+import com.exam.entities.PaymentStatus;
+import com.exam.exception.ResourceAlreadyExistsException;
+import com.exam.exception.ResourceNotFoundException;
+import com.exam.repository.BookingsRepo;
+import com.exam.repository.PaymentRepo;
+import com.razorpay.Order;
+import com.razorpay.RazorpayClient;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -47,8 +51,8 @@ public class PaymentServiceImpl implements PaymentService {
 
         try {
             RazorpayClient client = new RazorpayClient(
-                "rzp_test_S72CntxmHZ005O",
-                "6oEphQ3Q8PAe56rMaH3fa8zK"
+                "demodemdemmpdemp",
+                "dempdemmdempdemp"
             );
 
             JSONObject options = new JSONObject();

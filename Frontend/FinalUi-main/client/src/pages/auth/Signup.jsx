@@ -103,6 +103,9 @@ const Signup = () => {
               type="tel"
               placeholder="Phone Number"
               value={formData.phone}
+              maxLength={10}
+               minLength={10}
+  pattern="[0-9]{10}"
               onChange={handleChange}
               className="p-4 rounded-2xl border-2 border-gray-200 focus:ring-4 focus:ring-purple-200 focus:border-purple-400 transition-all text-lg"
               required
