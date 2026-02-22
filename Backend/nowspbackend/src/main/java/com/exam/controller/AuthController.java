@@ -73,8 +73,8 @@ public class AuthController {
 	     @GetMapping("/me")
 	     public ResponseEntity<?> me(Authentication auth) {
 	    	 
-	    	  JwtDTO dto = (JwtDTO) auth.getPrincipal();  // ✅ Full User object
-	    	    String email = dto.getEmail();   // JWT subject = email
+	    	  JwtDTO dto = (JwtDTO) auth.getPrincipal();  
+	    	    String email = dto.getEmail();  
 	         UserProfileRes profile = authService.getUserProfile(email);
 	         return ResponseEntity.ok(new ApiResponse<>(true, profile, "Profile fetched"));
 	     }

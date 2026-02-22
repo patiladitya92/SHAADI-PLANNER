@@ -45,7 +45,7 @@ function App() {
           }}
         />
 
-        {/* ✅ FIXED ROUTES STRUCTURE */}
+       
         <Routes>
           {/* PUBLIC LANDING (Guests see first) */}
           <Route path="/" element={<LandingHome />} />
@@ -73,7 +73,7 @@ function App() {
             <Route path="/admin/users" element={<AdminUsers />} />
           </Route>
           
-          {/* ✅ FIXED: 404 → Landing page (NOT login) */}
+          {/*  FIXED: 404 → Landing page (NOT login) */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>

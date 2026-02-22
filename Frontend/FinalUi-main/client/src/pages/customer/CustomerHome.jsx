@@ -211,9 +211,9 @@ const handleBookNow = async (vendor) => {
                   {/* 💳 BOOK NOW BUTTON */}
                   <button
                     onClick={(e) => {
-                      e.stopPropagation()      // ✅ CRITICAL: Stop card click
+                      e.stopPropagation()      
                       e.preventDefault()
-                      console.log('🔥 PAY NOW CLICKED')  // ✅ DEBUG
+                      console.log('🔥 PAY NOW CLICKED', vendor)
                       handleBookNow(vendor)
                     }}
                     disabled={bookingLoading[vendor.id]}

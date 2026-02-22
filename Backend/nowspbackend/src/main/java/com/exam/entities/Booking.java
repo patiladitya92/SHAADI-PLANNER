@@ -42,14 +42,14 @@ public class Booking {
     private LocalDate eventdate;  // event date
 
     @Column(nullable = false)
-    private LocalDateTime bookdate; // when booking created
+    private LocalDateTime bookdate; 
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private BookingStatus status; // PENDING / ACCEPTED / REJECTED / CANCELLED / PAID
+    private BookingStatus status; 
 
     @Column(nullable = false, precision = 11, scale = 2)
-    private BigDecimal amt;       // total amount
+    private BigDecimal amt;       
 
     @CreationTimestamp
     @Column(updatable = false)

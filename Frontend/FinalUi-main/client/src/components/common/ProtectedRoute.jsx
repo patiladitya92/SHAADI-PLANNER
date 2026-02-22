@@ -9,7 +9,7 @@ const ProtectedRoute = () => {
     const token = localStorage.getItem('token')
     const role = localStorage.getItem('role')
 
-    console.log('🔍 ProtectedRoute check:', {
+    console.log(' ProtectedRoute check:', {
       token: !!token,
       role,
       path: location.pathname

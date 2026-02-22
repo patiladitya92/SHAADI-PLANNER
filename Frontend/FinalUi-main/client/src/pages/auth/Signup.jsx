@@ -24,7 +24,7 @@ const Signup = () => {
     try {
       const response = await apiClient.get('/categories')
       const cats = response.data.data || response.data || []
-      setCategories(Array.isArray(cats) ? cats : [])
+      setCategories(cats);
     } catch (error) {
       console.error('Categories fetch failed:', error)
     }
@@ -57,17 +57,16 @@ const Signup = () => {
 
     setLoading(true)
     try {
-      console.log('📤 Registering:', formData)
-      
-      // ✅ FIXED: Handle ApiResponse wrapper
+      console.log('Registering:', formData)
+  
       const response = await apiClient.post('/auth/register', formData)
-      console.log('✅ Register response:', response.data)
+      console.log(' Register response:', response.data)
       
-      toast.success('✅ Account created! Please login.')
+      toast.success('Account created! Please login.')
       setTimeout(() => navigate('/login'), 2000)
       
     } catch (error) {
-      console.error('❌ Register error:', error.response?.data)
+      console.error(' Register error:', error.response?.data)
       const errorMsg = error.response?.data?.message || error.response?.data?.data?.message || 'Registration failed'
       toast.error(errorMsg)
     } finally {
@@ -80,7 +79,7 @@ const Signup = () => {
       <div className="glass-card p-12 rounded-4xl max-w-2xl w-full mx-6 shadow-2xl">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent mb-4">
-            ✨ Create Account
+             Create Account
           </h1>
           <p className="text-xl text-gray-600">Join WeddingBook as Customer or Vendor</p>
         </div>

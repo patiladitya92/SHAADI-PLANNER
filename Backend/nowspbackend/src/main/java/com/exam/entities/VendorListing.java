@@ -23,20 +23,20 @@ public class VendorListing {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;              // listing id
+    private Long id;              
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vendor_id", nullable = false)
-    private Vendor vendor;        // owner vendor
+    private Vendor vendor;        
 
     @Column(nullable = false)
-    private String title;         // e.g. "Haldi DJ Basic"
+    private String title;         
 
     @Column(length = 1000)
-    private String description;          // description
+    private String description;         
 
     @Column(nullable = false, precision = 11, scale = 2)
-    private BigDecimal price;     // package prices
+    private BigDecimal price;    
     
     @Column(length=500, nullable=true)
     private String photourl;
