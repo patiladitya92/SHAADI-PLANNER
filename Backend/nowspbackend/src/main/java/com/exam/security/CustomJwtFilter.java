@@ -49,7 +49,7 @@ public class CustomJwtFilter extends OncePerRequestFilter {
 							null, List.of(new SimpleGrantedAuthority(role)));
 			
 			SecurityContextHolder.getContext().setAuthentication(token);
-			log.info("auth info stored in sec ctx.....");
+			log.info("auth info stored in security ctx.....");
 		}
 		//delegate to next filter in the chain
 		filterChain.doFilter(request, response);

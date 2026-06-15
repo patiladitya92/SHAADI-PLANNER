@@ -2,6 +2,7 @@ package com.exam.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.hibernate.Hibernate;
 import org.modelmapper.ModelMapper;
@@ -49,6 +50,8 @@ public class AdminServiceImpl implements AdminService {
 	        UserDto dto = map.map(user, UserDto.class);              
 	        list.add(dto);                                           
 	    }
+		
+//		List<UserDto> list2 = list.stream().map(t -> map.map(t, UserDto.class)).toList();
 		return list;
 	}
 
@@ -97,11 +100,7 @@ public class AdminServiceImpl implements AdminService {
 	    List<BookingRes> list = new ArrayList<>();
 	    
 	    for (Booking booking : bookingList) {
-	        // Force load LAZY associations
-	        Hibernate.initialize(booking.getCust());
-	        Hibernate.initialize(booking.getVendor());
-	        Hibernate.initialize(booking.getList());
-	        
+	    
 	        BookingRes res = new BookingRes();
 	        res.setId(booking.getId());
 	        res.setEventdate(booking.getEventdate());

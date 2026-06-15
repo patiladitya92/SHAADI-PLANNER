@@ -23,11 +23,11 @@ public class ServiceCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;          // category id
+    private Long id;         
 
     @Column(nullable = false, unique = true)
-    private String name;      // e.g. DJ, CATERING
-
+    private String name;     
+    
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime createdAt;

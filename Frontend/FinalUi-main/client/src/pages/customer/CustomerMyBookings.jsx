@@ -35,7 +35,7 @@ const CustomerMyBookings = () => {
 
       // 2️⃣ Razorpay Checkout
       const options = {
-        key: 'rzp_test_S72CntxmHZ005O', // ✅ KEY ID ONLY
+        key: 'rzp_test_demmmmodeemo', // ✅ KEY ID ONLY
         amount: payment.amt * 100,
         currency: 'INR',
         name: 'Shaadi Planner',

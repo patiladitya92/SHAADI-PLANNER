@@ -7,7 +7,7 @@ import { Mail, ArrowLeft, CheckCircle } from 'lucide-react'
 
 const ForgotPasswordPage = () => {
   const [email, setEmail] = useState('')
-  const [sent, setSent] = useState(false)  // ✅ FIXED: Add this line
+  const [sent, setSent] = useState(false)  
   const [isLoading, setIsLoading] = useState(false)
   const [forgotPassword] = useForgotPasswordMutation()
   const navigate = useNavigate()
@@ -21,7 +21,7 @@ const ForgotPasswordPage = () => {
     try {
       const response = await forgotPassword({ email }).unwrap()
       console.log('SUCCESS:', response)
-      setSent(true)  // ✅ FIXED: Now defined
+      setSent(true)  //  FIXED: Now defined
       toast.success('Reset link sent to your email!')
     } catch (err) {
       console.error('ERROR:', err)

@@ -64,7 +64,7 @@ public class AuthController {
 
 	     
 	     @PostMapping("/register")
-	     public ResponseEntity<ApiResponse<Void>> register(@RequestBody @Valid RegisterReq dto) {
+	     public ResponseEntity<ApiResponse<?>> register(@RequestBody @Valid RegisterReq dto) {
 	         authService.register(dto);
 	         return ResponseEntity.ok(new ApiResponse<>(true, null, "Registered successfully"));
 	     }
@@ -73,8 +73,8 @@ public class AuthController {
 	     @GetMapping("/me")
 	     public ResponseEntity<?> me(Authentication auth) {
 	    	 
-	    	  JwtDTO dto = (JwtDTO) auth.getPrincipal();  // ✅ Full User object
-	    	    String email = dto.getEmail();   // JWT subject = email
+	    	  JwtDTO dto = (JwtDTO) auth.getPrincipal();  
+	    	    String email = dto.getEmail();  
 	         UserProfileRes profile = authService.getUserProfile(email);
 	         return ResponseEntity.ok(new ApiResponse<>(true, profile, "Profile fetched"));
 	     }

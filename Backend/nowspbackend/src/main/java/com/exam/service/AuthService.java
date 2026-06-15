@@ -94,14 +94,14 @@ public class AuthService {
     res.setPhone(user.getPhone());
     res.setRole(user.getRole().name());
     
-    // Customer profile
+   
     if ("ROLE_CUSTOMER".equals(user.getRole().name())) {
         customerRepo.findByUserId(user.getId()).ifPresent(cust -> {
             res.setCustomerId(cust.getId());
             res.setCustomerCity(cust.getCity());
         });
     }
-    // Vendor profile  
+    
     else if ("ROLE_VENDOR".equals(user.getRole().name())) {
         vendorRepo.findByUserId(user.getId()).ifPresent(vendor -> {
             res.setVendorId(vendor.getId());
@@ -119,13 +119,13 @@ public class AuthService {
         User user = userRepo.findByEmailIgnoreCase(email)
             .orElseThrow(() -> new ResourceNotFoundException("Email not registered"));
         
-        // Generate token + 1 hour expiry
+        
         String resetToken = UUID.randomUUID().toString();
         user.setResetToken(resetToken);
         user.setResetTokenExpiry(LocalDateTime.now().plusHours(1));
         userRepo.save(user);
         
-        // Send email
+     
         emailService.sendResetPasswordEmail(user.getEmail(), resetToken, user.getName());
     }
 	
